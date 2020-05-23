@@ -68,7 +68,7 @@ class App extends React.Component {
   }
 
   getEntries () {
-    fetch('https://photoset-api.herokuapp.com//posts')
+    fetch('https://photoset-api.herokuapp.com/posts')
       .then(response => response.json())
       .then(json => this.setState({ posts: json }))
       .catch(error => console.error(error))
