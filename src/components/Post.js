@@ -1,4 +1,5 @@
 import React from 'react'
+import Form from './Form.js'
 
 
 class Post extends React.Component {
@@ -15,8 +16,8 @@ class Post extends React.Component {
         this.setState({bodyVisible: !this.state.bodyVisible})
     }
 
-    handleUpdate = (event, entry) => {
-        this.props.handleUpdate(event, entry)
+    handleUpdate = (event, post) => {
+        this.props.handleUpdate(event, post)
         this.toggleForm()
     }
 
@@ -26,12 +27,11 @@ class Post extends React.Component {
             <div className="post" key={i}>
                     <h3>{ post.title }</h3>
                     <h4>{ post.photographer }</h4>
-                    {/* <p>{ post.author }</p> */}
-                    {/* <p>{this.state.bodyVisible ? post.body : null }</p>  */}
-                    {/* <button onClick={this.toggleBody}>VIEW ENTRY</button>
+                    <p>{this.state.bodyVisible ? post.description : null }</p>
+                    <button onClick={this.toggleBody}>VIEW POST</button>
                     <button onClick={this.toggleForm}>EDIT</button>
-                    <button onClick={()=> handleDelete(entry)}>DELETE</button> */}
-                    {/* {this.state.editVisible ? <Form id="edit-entry" entry={entry} handleSubmit={handleUpdate} toggleForm={this.toggleForm}/> : null } */}
+                    <button onClick={()=> handleDelete(post)}>DELETE</button>
+                    {this.state.editVisible ? <Form id="edit-post" post={post} handleSubmit={handleUpdate} toggleForm={this.toggleForm}/> : null }
             </div>
         )
     }

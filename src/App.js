@@ -1,5 +1,7 @@
 import React from 'react';
-import Upload from './components/Upload.js'
+import Header from './components/Header.js'
+import Recents from './components/Carousel.js'
+import NewPost from './components/NewPost.js'
 import './App.css';
 import Main from './components/Main.js'
 
@@ -8,66 +10,65 @@ class App extends React.Component {
     posts: []
   }
 
-  // handleAdd = (event, formInputs) => {
-  //   event.preventDefault();
-  //   fetch("https://sci-log.herokuapp.com/entries", {
-  //     body: JSON.stringify(formInputs),
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json, text/plain, */*",
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((createdEntry) => createdEntry.json())
-  //     .then((jsonedEntry) => {
-  //       // add Entry to entries
-  //       this.setState({
-  //         entries: [jsonedEntry, ...this.state.entries],
-  //       });
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+  handleAdd = (event, formInputs) => {
+    event.preventDefault();
+    fetch("https://photoset-api.herokuapp.com/posts", {
+      body: JSON.stringify(formInputs),
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((createdPost) => createdPost.json())
+      .then((jsonedPost) => {
+        this.setState({
+          posts: [jsonedPost, ...this.state.posts],
+        });
+      })
+      .catch((error) => console.log(error));
+  };
 
-  // handleDelete = (deletedEntry) => {
-  //   fetch(`https://sci-log.herokuapp.com/entries/${deletedEntry.id}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       Accept: "application/json, text/plain, */*",
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((json) => {
-  //       const entries = this.state.entries.filter(
-  //         (entry) => entry.id !== deletedEntry.id
-  //       );
-  //       this.setState({ entries });
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+  handleDelete = (deletedPost) => {
+    fetch(`https://photoset-api.herokuapp.com/posts/${deletedPost.id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((json) => {
+        const posts = this.state.posts.filter(
+          (post) => post.id !== deletedPost.id
+        );
+        this.setState({ posts });
+      })
+      .catch((error) => console.log(error));
+  };
 
 
-  // handleUpdate = (event, formInputs) => {
-  //   event.preventDefault()
-  //   console.log(formInputs.id)
-  //   fetch(`https://sci-log.herokuapp.com/entries/${formInputs.id}`, {
-  //     body: JSON.stringify(formInputs),
-  //     method: 'PUT',
-  //     headers: {
-  //       'Accept': 'application/json, text/plain, */*',
-  //       'Content-Type': 'application/json'
-  //     }
-  // })
-  //  .then((updatedEntry) => {
-  //    this.getEntries()
-  //  })
-  //  .catch((error) => console.log(error))
-  // }
-
-  componentDidMount() {
-    this.getEntries()
+  handleUpdate = (event, formInputs) => {
+    event.preventDefault()
+    console.log(formInputs.id)
+    fetch(`https://photoset-api.herokuapp.com/posts/${formInputs.id}`, {
+      body: JSON.stringify(formInputs),
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+  })
+   .then((updatedPost) => {
+     this.getPosts()
+   })
+   .catch((error) => console.log(error))
   }
 
-  getEntries () {
+  componentDidMount() {
+    this.getPosts()
+  }
+
+  getPosts () {
     fetch('https://photoset-api.herokuapp.com/posts')
       .then(response => response.json())
       .then(json => this.setState({ posts: json }))
@@ -76,8 +77,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Header />
+        <Recents />
+        <NewPost handleSubmit={this.handleAdd} />
           <Main 
           posts={this.state.posts}
+          handleDelete={this.handleDelete}
+          handleUpdate={this.handleUpdate}
           />
       </div>
     )

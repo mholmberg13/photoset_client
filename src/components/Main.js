@@ -7,6 +7,8 @@ class Main extends React.Component {
             <div className="main">
                 <Posts
                     posts={this.props.posts}
+                    handleDelete={this.props.handleDelete}
+                    handleUpdate={this.props.handleUpdate}
                 />
             </div>
         )
