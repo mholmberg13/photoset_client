@@ -6,7 +6,6 @@ class NewPost extends React.Component {
     render() {
         return (
             <div className="new-post">
-                <Upload />
                 <Form handleSubmit={this.props.handleSubmit} />
             </div>
         )

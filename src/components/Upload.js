@@ -1,26 +1,40 @@
-import React from 'react';
+import React from 'react'
 
-class Upload extends React.Component {
-    
-handleSubmit = (event) => {
-    event.preventDefault()
-    console.log("submitting")
-    const formData = new FormData(event.target)
-    API.submitPost(formData)
-      .then(data => props.setPost(data.post))
-      .catch(console.error);
-  }
+export default class NewItemForm extends React.Component {
 
-  render () {
-  return ( 
+    state = {
+        image: {}
+    }
 
-      <label htmlFor=":picture" >
-        Upload image
-        <input type="file" name=":picture" accept="image/*" />
-      </label>
-  );
-  }
-  
-}
+    onChange = (e) => {
+        e.persist()
+        this.setState(() => {
+            return {
+                [e.target.name]: e.target.files[0]
+            }
+        })
+    }
 
-export default Upload; 
+    onSubmit = (e) => {
+        e.preventDefault()
+        const form = new FormData()
+        form.append("image", this.state.image)
+        fetch(`http://localhost:30001/posts`, {
+            method: "POST",
+            body: form
+        })
+    }
+    render(){
+        return (
+            <div className="form">
+                <h1>New Upload</h1>
+                <form onSubmit={this.onSubmit}>
+                    <label>Image Upload</label>
+                    <input type="file" name="image" onChange={this.onChange}/>
+                    <br/>
+                    <input type="submit"/>
+                </form>
+            </div>
+        )
+    }
+} 

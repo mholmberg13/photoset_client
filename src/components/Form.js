@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "./Input.js";
 import Descript from "./Descript.js";
-
+import Upload from './Upload.js'
 
 class Form extends React.Component {
   state = {
@@ -19,7 +19,6 @@ class Form extends React.Component {
   handleSubmit = (event) => {
     console.log("running");
     event.preventDefault();
-
     const { title, photographer, description, iso, ss, ap } = this.state;
     const post = {
       title: title,
@@ -100,6 +99,8 @@ class Form extends React.Component {
           id={"ap"}
         />
         <br/>
+        <Upload/>
+
         <input id="add-update" type="submit" value={this.props.post ? "UPDATE" : "ADD"} />
       </form>
     );

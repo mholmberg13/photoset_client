@@ -28,6 +28,7 @@ class Post extends React.Component {
                     <h3>{ post.title }</h3>
                     <h4>{ post.photographer }</h4>
                     <p>{this.state.bodyVisible ? post.description : null }</p>
+                    <img src={post.picture}/>
                     <button onClick={this.toggleBody}>VIEW POST</button>
                     <button onClick={this.toggleForm}>EDIT</button>
                     <button onClick={()=> handleDelete(post)}>DELETE</button>
