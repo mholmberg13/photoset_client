@@ -7,7 +7,7 @@ class NewPost extends React.Component {
     render() {
         return (
             <div className="new-post">
-                <NewItemForm handleSubmit={this.props.handleSubmit}/>
+                <NewItemForm handleSubmit={this.props.handleSubmit} getPosts={this.props.getPosts}/>
                 <div className="slogan">
                     <h3>NO ACCOUNTS</h3>
                     <h2>NO LIKES</h2>

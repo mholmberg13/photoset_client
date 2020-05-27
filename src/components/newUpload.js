@@ -30,19 +30,19 @@ export default class NewItemForm extends React.Component {
 
     onSubmit = (event) => {
         event.preventDefault()
-        const form = new FormData()
-        form.append("title", this.state.title)
-        form.append("image", this.state.image)
-        form.append("photographer", this.state.photographer)
-        form.append("shutter", this.state.shutter)
-        form.append("iso", this.state.iso)
-        form.append("aperture", this.state.aperture)
-        fetch(`https://photoset-api-v2.herokuapp.com/posts`, {
+        const post = new FormData()
+        post.append("title", this.state.title)
+        post.append("image", this.state.image)
+        post.append("photographer", this.state.photographer)
+        post.append("shutter", this.state.shutter)
+        post.append("iso", this.state.iso)
+        post.append("aperture", this.state.aperture)
+        fetch(`http://localhost:3000/posts`, {
             method: "POST",
-            body: form
+            body: post
         })
         console.log(this.state.title)
-
+        this.props.getPosts()
     }
 
     componentDidMount() {
@@ -77,7 +77,7 @@ export default class NewItemForm extends React.Component {
                     <br/>
                     <input type="text" name="aperture" value={this.state.aperture} placeholder="aperture" onChange={this.handleChange}/>
                     <br/>
-                    <input type="submit"/>
+                    <input onClick={this.props.getPosts} type="submit"/>
                 </form>
                 
                 
