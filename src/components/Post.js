@@ -33,11 +33,8 @@ class Post extends React.Component {
 
                     <div className="post-buttons">
                         <button onClick={this.toggleBody}>SETTINGS</button>
-                        <button onClick={this.toggleForm}>EDIT</button>
                         <button id="delete" onClick={()=> handleDelete(post)}>DELETE</button>
                     </div>
-
-                    {this.state.editVisible ? <Form id="edit-post" post={post} handleSubmit={handleUpdate} toggleForm={this.toggleForm}/> : null }
             </div>
         )
     }

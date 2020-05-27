@@ -77,7 +77,7 @@ export default class NewItemForm extends React.Component {
                     <br/>
                     <input type="text" name="aperture" value={this.state.aperture} placeholder="aperture" onChange={this.handleChange}/>
                     <br/>
-                    <input onClick={this.props.getPosts} type="submit"/>
+                    <input id="upload-button" type="submit"/>
                 </form>
                 
                 

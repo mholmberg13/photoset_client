@@ -101,3 +101,15 @@ hr {
   margin-right: 15px;
 }
 
+#file {
+  border-style: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+}
+
+#upload-button {
+  border-style: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  padding-left: 0;
+}
