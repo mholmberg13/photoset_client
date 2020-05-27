@@ -19,14 +19,14 @@ export default class NewItemForm extends React.Component {
         e.preventDefault()
         const form = new FormData()
         form.append("image", this.state.image)
-        fetch(`http://localhost:30001/posts`, {
+        fetch("http://localhost:3000/posts", {
             method: "POST",
             body: form
         })
     }
     render(){
         return (
-            <div className="form">
+            <div className="fileform">
                 <h1>New Upload</h1>
                 <form onSubmit={this.onSubmit}>
                     <label>Image Upload</label>

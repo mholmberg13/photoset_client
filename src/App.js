@@ -13,7 +13,7 @@ class App extends React.Component {
 
   handleAdd = (event, formInputs) => {
     event.preventDefault();
-    fetch("http://localhost:3000/posts", {
+    fetch("https://photoset-api-v2.herokuapp.com/posts", {
       body: JSON.stringify(formInputs),
       method: "POST",
       headers: {
@@ -31,7 +31,7 @@ class App extends React.Component {
   };
 
   handleDelete = (deletedPost) => {
-    fetch(`http://localhost:3000/posts/${deletedPost.id}`, {
+    fetch(`https://photoset-api-v2.herokuapp.com/${deletedPost.id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -51,7 +51,7 @@ class App extends React.Component {
   handleUpdate = (event, formInputs) => {
     event.preventDefault()
     console.log(formInputs.id)
-    fetch(`http://localhost:3000/posts/${formInputs.id}`, {
+    fetch(`https://photoset-api-v2.herokuapp.com/${formInputs.id}`, {
       body: JSON.stringify(formInputs),
       method: 'PUT',
       headers: {
@@ -70,7 +70,7 @@ class App extends React.Component {
   }
 
   getPosts () {
-    fetch('http://localhost:3000/posts')
+    fetch('https://photoset-api-v2.herokuapp.com/posts')
       .then(response => response.json())
       .then(json => this.setState({ posts: json }))
       .catch(error => console.error(error))

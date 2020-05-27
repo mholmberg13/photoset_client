@@ -27,11 +27,16 @@ class Post extends React.Component {
             <div className="post" key={i}>
                     <h3>{ post.title }</h3>
                     <h4>{ post.photographer }</h4>
-                    <p>{this.state.bodyVisible ? post.description : null }</p>
-                    <img src={post.picture}/>
-                    <button onClick={this.toggleBody}>VIEW POST</button>
-                    <button onClick={this.toggleForm}>EDIT</button>
-                    <button onClick={()=> handleDelete(post)}>DELETE</button>
+                    <img src={post.image}/>
+
+                    {this.state.bodyVisible ? <div className="settings"><h5>Shutter Speed: {post.shutter}</h5> <h5>ISO: {post.iso}</h5> <h5>Aperture: {post.aperture}</h5></div> : null }
+
+                    <div className="post-buttons">
+                        <button onClick={this.toggleBody}>SETTINGS</button>
+                        <button onClick={this.toggleForm}>EDIT</button>
+                        <button id="delete" onClick={()=> handleDelete(post)}>DELETE</button>
+                    </div>
+
                     {this.state.editVisible ? <Form id="edit-post" post={post} handleSubmit={handleUpdate} toggleForm={this.toggleForm}/> : null }
             </div>
         )
